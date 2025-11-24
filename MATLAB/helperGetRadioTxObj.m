@@ -1,4 +1,4 @@
-function [radio,spectrumAnalyze] = helperGetRadioTxObj(ofdmTx)
+function [radio,spectrumAnalyze] = helperGetRadioTxObj(ofdmTx, settingsSDR)
 %helperGetRadioTxObj(OFDMTX) returns the radio system object RADIO, based
 %   on the chosen radio device and radio parameters such as Gain,
 %   CenterFrequency, MasterClockRate, and Interpolation factor from the
@@ -8,7 +8,7 @@ function [radio,spectrumAnalyze] = helperGetRadioTxObj(ofdmTx)
 % Copyright 2023-2024 The MathWorks, Inc.
 
 if strcmpi(ofdmTx.RadioDevice,'PLUTO')
-    radio = sdrtx('Pluto');
+    radio = sdrtx('Pluto', 'RadioID', settingsSDR.RadioID);
     radio.BasebandSampleRate = ofdmTx.SampleRate;
     radio.CenterFrequency = ofdmTx.CenterFrequency;
     radio.Gain  = ofdmTx.Gain;
