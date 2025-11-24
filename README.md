@@ -5,7 +5,6 @@ This repository contains tools and modules for OFDM channel estimation using Sof
 ## Contents
 
 - **gr-delta_pulse**: GNU Radio OOT module for generating delta-like pulses for channel sounding
-- **MATLAB**: MATLAB scripts and examples for OFDM channel estimation
 - **python**: Python utilities for delta pulse generation
 
 ---
