@@ -6,10 +6,10 @@ parameters:
 
 - id: bandwidth
   label: Bandwidth (Hz)
-  dtype: float
-  default: '1e6'
+  dtype: int
+  default: '1000000'
   hide: none
-  
+
 - id: pulse_length
   label: Pulse Length (samples)
   dtype: int
@@ -55,7 +55,7 @@ outputs:
 
 templates:
   imports: from delta_pulse import delta_pulse_source
-  make: delta_pulse_source(${pulse_length}, ${amplitude}, ${window}, ${center}, ${repeat}, ${num_pulses})
+  make: delta_pulse_source(${bandwidth}, ${pulse_length}, ${amplitude}, ${window}, ${center}, ${repeat}, ${num_pulses})
 
 file_format: 1
 
