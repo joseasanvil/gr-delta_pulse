@@ -1,12 +1,11 @@
 import numpy as np
 
-def sdr_delta_pulse(bandwidth=1000000, pulse_length=1024, amplitude=0.8, window=True, center=True):
+def sdr_delta_pulse(num_bins=1024, amplitude=0.8, window=True, center=True):
     """
     Generate an SDR-safe delta-like pulse using an OFDM-style IFFT.
 
     Parameters:
-        bandwidth (int): Bandwidth in Hz
-        pulse_length (int): Number of samples in the pulse
+        num_bins (int): Number of bins in the pulse
         amplitude (float): Output amplitude (keep <= 1.0 for Pluto SDR)
         window (bool): Apply Hann window to reduce ringing
         center (bool): If True, center the pulse in the array (recommended for windowing)
@@ -16,14 +15,11 @@ def sdr_delta_pulse(bandwidth=1000000, pulse_length=1024, amplitude=0.8, window=
     """
 
     # Frequency domain: all ones => impulse in time domain
-    # X = np.ones(N, dtype=np.complex64)
-    X = np.ones(bandwidth, dtype=np.complex64)
+    X = np.ones(num_bins, dtype=np.complex64)
+    # X = np.ones(bandwidth, dtype=np.complex64)
 
     # Time-domain impulse (delta at index 0)
     x = np.fft.ifft(X)
-    
-    # Set the pulse to have N samples
-    x = x[:pulse_length]
 
     # Center the pulse if requested (moves delta to middle of array)
     if center:
@@ -34,7 +30,7 @@ def sdr_delta_pulse(bandwidth=1000000, pulse_length=1024, amplitude=0.8, window=
 
     # Optional window to smooth edges
     if window:
-        w = np.hanning(pulse_length)
+        w = np.hanning(num_bins)
         x = x * w
         # Renormalize after windowing to maintain desired amplitude
         max_val = np.max(np.abs(x))

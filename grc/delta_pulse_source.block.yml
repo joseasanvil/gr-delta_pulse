@@ -4,14 +4,8 @@ category: '[delta_pulse]'
 
 parameters:
 
-- id: bandwidth
-  label: Bandwidth (Hz)
-  dtype: int
-  default: '1000000'
-  hide: none
-
-- id: pulse_length
-  label: Pulse Length (samples)
+- id: num_bins
+  label: Number of Bins
   dtype: int
   default: '1024'
   hide: none
@@ -55,7 +49,7 @@ outputs:
 
 templates:
   imports: from delta_pulse import delta_pulse_source
-  make: delta_pulse_source(${bandwidth}, ${pulse_length}, ${amplitude}, ${window}, ${center}, ${repeat}, ${num_pulses})
+  make: delta_pulse_source(${num_bins}, ${amplitude}, ${window}, ${center}, ${repeat}, ${num_pulses})
 
 file_format: 1
 

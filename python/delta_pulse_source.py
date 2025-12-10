@@ -23,11 +23,11 @@ class delta_pulse_source(gr.sync_block):
     Output: Complex-valued samples (complex64)
     """
 
-    def __init__(self, bandwidth=1e6, pulse_length=1024, amplitude=0.8, window=True, 
+    def __init__(self, num_bins=1024, amplitude=0.8, window=True, 
                  center=True, repeat=True, num_pulses=-1):
         """
         Parameters:
-            pulse_length (int): Number of samples in the pulse (default: 1024)
+            num_bins (int): Number of bins in the pulse (default: 1024)
             amplitude (float): Output amplitude (keep <= 1.0 for SDRs) (default: 0.8)
             window (bool): Apply Hann window to reduce ringing (default: True)
             center (bool): Center the pulse in the array (default: True)
@@ -41,8 +41,7 @@ class delta_pulse_source(gr.sync_block):
             out_sig=[np.complex64]
         )
         
-        self.pulse_length = int(pulse_length)
-        self.bandwidth = int(bandwidth)
+        self.num_bins = int(num_bins)
         self.amplitude = float(amplitude)
         self.window = bool(window)
         self.center = bool(center)
@@ -51,8 +50,7 @@ class delta_pulse_source(gr.sync_block):
         
         # Generate the pulse once
         self.pulse = sdr_delta_pulse(
-            bandwidth=self.bandwidth,
-            pulse_length=self.pulse_length,
+            num_bins=self.num_bins,
             amplitude=self.amplitude,
             window=self.window,
             center=self.center)
@@ -94,7 +92,7 @@ class delta_pulse_source(gr.sync_block):
             
             if self.in_pulse:
                 # Output pulse samples
-                samples_to_copy = min(self.pulse_length - self.pulse_index, 
+                samples_to_copy = min(self.num_bins - self.pulse_index, 
                                      noutput_items - out_idx)
                 out[out_idx:out_idx + samples_to_copy] = \
                     self.pulse[self.pulse_index:self.pulse_index + samples_to_copy]
@@ -103,7 +101,7 @@ class delta_pulse_source(gr.sync_block):
                 out_idx += samples_to_copy
                 
                 # Check if pulse is complete
-                if self.pulse_index >= self.pulse_length:
+                if self.pulse_index >= self.num_bins:
                     self.in_pulse = False
                     self.pulse_index = 0
                     
