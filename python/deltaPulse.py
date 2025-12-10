@@ -1,11 +1,11 @@
 import numpy as np
 
-def sdr_delta_pulse(bandwidth=1e6, pulse_length=1024, amplitude=0.8, window=True, center=True):
+def sdr_delta_pulse(bandwidth=1000000, pulse_length=1024, amplitude=0.8, window=True, center=True):
     """
     Generate an SDR-safe delta-like pulse using an OFDM-style IFFT.
 
     Parameters:
-        bandwidth (float): Bandwidth in Hz
+        bandwidth (int): Bandwidth in Hz
         pulse_length (int): Number of samples in the pulse
         amplitude (float): Output amplitude (keep <= 1.0 for Pluto SDR)
         window (bool): Apply Hann window to reduce ringing

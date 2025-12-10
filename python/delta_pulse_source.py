@@ -42,7 +42,7 @@ class delta_pulse_source(gr.sync_block):
         )
         
         self.pulse_length = int(pulse_length)
-        self.bandwidth = float(bandwidth)
+        self.bandwidth = int(bandwidth)
         self.amplitude = float(amplitude)
         self.window = bool(window)
         self.center = bool(center)
