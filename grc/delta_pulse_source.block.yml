@@ -3,6 +3,13 @@ label: Delta Pulse Source
 category: '[delta_pulse]'
 
 parameters:
+
+- id: bandwidth
+  label: Bandwidth (Hz)
+  dtype: float
+  default: '1e6'
+  hide: none
+  
 - id: pulse_length
   label: Pulse Length (samples)
   dtype: int

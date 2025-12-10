@@ -23,7 +23,7 @@ class delta_pulse_source(gr.sync_block):
     Output: Complex-valued samples (complex64)
     """
 
-    def __init__(self, pulse_length=1024, amplitude=0.8, window=True, 
+    def __init__(self, bandwidth=1e6, pulse_length=1024, amplitude=0.8, window=True, 
                  center=True, repeat=True, num_pulses=-1):
         """
         Parameters:
@@ -42,6 +42,7 @@ class delta_pulse_source(gr.sync_block):
         )
         
         self.pulse_length = int(pulse_length)
+        self.bandwidth = float(bandwidth)
         self.amplitude = float(amplitude)
         self.window = bool(window)
         self.center = bool(center)
@@ -50,11 +51,11 @@ class delta_pulse_source(gr.sync_block):
         
         # Generate the pulse once
         self.pulse = sdr_delta_pulse(
-            N=self.pulse_length,
+            bandwidth=self.bandwidth,
+            pulse_length=self.pulse_length,
             amplitude=self.amplitude,
             window=self.window,
-            center=self.center
-        )
+            center=self.center)
         
         # State tracking
         self.pulse_index = 0

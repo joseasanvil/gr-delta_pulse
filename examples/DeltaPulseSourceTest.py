@@ -68,6 +68,8 @@ class DeltaPulseSourceTest(gr.top_block, Qt.QWidget):
         self.samp_rate = samp_rate = 1000000
         self.rx_gain = rx_gain = 50
         self.freq = freq = 2400000000
+        self.Pluto2 = Pluto2 = "usb:2.6.5"
+        self.Pluto1 = Pluto1 = "usb:2.5.5"
 
         ##################################################
         # Blocks
@@ -97,7 +99,7 @@ class DeltaPulseSourceTest(gr.top_block, Qt.QWidget):
         self.qtgui_sink_x_0.enable_rf_freq(False)
 
         self.top_layout.addWidget(self._qtgui_sink_x_0_win)
-        self.iio_pluto_source_0 = iio.fmcomms2_source_fc32('' if '' else iio.get_pluto_uri(), [True, True], 32768)
+        self.iio_pluto_source_0 = iio.fmcomms2_source_fc32(Pluto2 if Pluto2 else iio.get_pluto_uri(), [True, True], 32768)
         self.iio_pluto_source_0.set_len_tag_key('packet_len')
         self.iio_pluto_source_0.set_frequency(2400000000)
         self.iio_pluto_source_0.set_samplerate(samp_rate)
@@ -107,7 +109,7 @@ class DeltaPulseSourceTest(gr.top_block, Qt.QWidget):
         self.iio_pluto_source_0.set_rfdc(True)
         self.iio_pluto_source_0.set_bbdc(True)
         self.iio_pluto_source_0.set_filter_params('Auto', '', 0, 0)
-        self.iio_pluto_sink_0 = iio.fmcomms2_sink_fc32('' if '' else iio.get_pluto_uri(), [True, True], 32768, False)
+        self.iio_pluto_sink_0 = iio.fmcomms2_sink_fc32(Pluto1 if Pluto1 else iio.get_pluto_uri(), [True, True], 32768, False)
         self.iio_pluto_sink_0.set_len_tag_key('')
         self.iio_pluto_sink_0.set_bandwidth(20000000)
         self.iio_pluto_sink_0.set_frequency(2400000000)
@@ -161,6 +163,18 @@ class DeltaPulseSourceTest(gr.top_block, Qt.QWidget):
     def set_freq(self, freq):
         self.freq = freq
         self.qtgui_sink_x_0.set_frequency_range(self.freq, self.samp_rate)
+
+    def get_Pluto2(self):
+        return self.Pluto2
+
+    def set_Pluto2(self, Pluto2):
+        self.Pluto2 = Pluto2
+
+    def get_Pluto1(self):
+        return self.Pluto1
+
+    def set_Pluto1(self, Pluto1):
+        self.Pluto1 = Pluto1
 
 
 

@@ -33,6 +33,30 @@ options:
     state: enabled
 
 blocks:
+- name: Pluto1
+  id: variable
+  parameters:
+    comment: ''
+    value: '"usb:2.5.5"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [560, 96.0]
+    rotation: 0
+    state: true
+- name: Pluto2
+  id: variable
+  parameters:
+    comment: ''
+    value: '"usb:2.6.5"'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [704, 96.0]
+    rotation: 0
+    state: true
 - name: freq
   id: variable
   parameters:
@@ -161,7 +185,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [184, 124.0]
+    coordinate: [240, 180.0]
     rotation: 0
     state: enabled
 - name: iio_pluto_sink_0
@@ -182,12 +206,12 @@ blocks:
     len_tag_key: ''
     samplerate: samp_rate
     type: fc32
-    uri: ''
+    uri: Pluto1
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [608, 176.0]
+    coordinate: [544, 168.0]
     rotation: 0
     state: enabled
 - name: iio_pluto_source_0
@@ -213,12 +237,12 @@ blocks:
     rfdc: 'True'
     samplerate: samp_rate
     type: fc32
-    uri: ''
+    uri: Pluto2
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [120, 296.0]
+    coordinate: [320, 352.0]
     rotation: 0
     state: enabled
 - name: qtgui_sink_x_0
@@ -247,7 +271,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [704, 312.0]
+    coordinate: [544, 384.0]
     rotation: 0
     state: enabled
 
