@@ -17,7 +17,7 @@ def sdr_delta_pulse(bandwidth=1e6, pulse_length=1024, amplitude=0.8, window=True
 
     # Frequency domain: all ones => impulse in time domain
     # X = np.ones(N, dtype=np.complex64)
-    X = np.zeros(bandwidth, dtype=np.complex64)
+    X = np.ones(bandwidth, dtype=np.complex64)
 
     # Time-domain impulse (delta at index 0)
     x = np.fft.ifft(X)
